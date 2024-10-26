@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConectPE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/comment.css">
+
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="logo">
+            <img alt="Logo" src="/img/Logo.png">
+            <span style="cursor: default;"><span class="conect">Conect</span>PE</span>
+        </div>
+        <div class="search-bar">
+            <input id="search" placeholder="Pesquisar..." type="text" />
+            <button>
+                <i class="fas fa-search">
+                </i>
+            </button>
+        </div>
+        <div class="icons">
+            <i class="fas fa-envelope">
+            </i>
+            <i class="fas fa-bell">
+            </i>
+            <div class="menu">
+                <i class="fas fa-bars" onclick="toggleMenu(this)">
+                </i>
+                <div class="menu-content">
+                    <a href="#">
+                        <i class="fas fa-user-circle">
+                        </i>
+                        Perfil
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-cog">
+                        </i>
+                        Configurações
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-users-cog">
+                        </i>
+                        Gerenciar Contas
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle">
+                        </i>
+                        Suporte
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt">
+                        </i>
+                        Sair da Conta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar-left">
+            <a href="#">
+                <img alt="User Image" height="40"
+                    src="https://storage.googleapis.com/a1aa/image/viFtVqbgIa5BFdHfpdfkXVXFzPfoJGVxuqaL739G5I4TnXQnA.jpg"
+                    style="border-radius: 50%; margin-right: 10px;" width="40" />
+                Nome de Usuário
+            </a>
+            <a href="#">
+                <i class="fas fa-user-friends">
+                </i>
+                Amigos
+            </a>
+            <a href="#">
+                <i class="fas fa-users">
+                </i>
+                Grupos
+            </a>
+            <a href="#">
+                <i class="fas fa-bookmark">
+                </i>
+                Salvos
+            </a>
+            <a href="#">
+                <i class="fas fa-bullhorn">
+                </i>
+                Anúncio
+            </a>
+            <div class="ad-space">
+                <p>
+                    Espaço para Anúncios
+                </p>
+            </div>
+        </div>
+        <div class="main-content" id="main-content">
+            
+                <div class="post-box post" id="post-box">
+                    <div class="post-header">
+                        <img alt="Profile Picture" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg"
+                            width="40" />
+                        <div class="post-info">
+                            <span>
+                                Nome de Usuário
+                            </span>
+                        </div>
+                    </div>
+                    <div class="post-content" style="display: flex;justify-content: center;">
+                        <input id="content-post" placeholder="O que você está pensando agora?"
+                            style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
+                            type="text" onfocus="this.style.transform='scale(1.02)'"
+                            onblur="this.style.transform='scale(1)'" />
+                    </div>
+                    <div class="post-actions">
+                        <button onclick="addPhoto()">
+                            <i class="fas fa-image">
+                            </i>
+                            Adicionar Fotos
+                        </button>
+                        <button>
+                            <i class="fas fa-hashtag">
+                            </i>
+                            Hashtags
+                        </button>
+                        <button id="publicar">
+                            <i class="fas fa-paper-plane">
+                            </i>
+                            Publicar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="post-box post">
+                    <div class="post-header">
+                        <img alt="Profile Picture" height="40" onclick="expandImage(this)"
+                            src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg"
+                            width="40" />
+                        <div class="post-info">
+                            <span>
+                                Nome de Usuário
+                            </span>
+                            <div class="menu">
+                                <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
+                                </i>
+                                <div class="menu-content">
+                                    <a href="#">
+                                        Acessar Perfil do Usuário
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Conteúdo do post...
+                    </div>
+                    <div class="post-actions">
+                        <button class="like-button" onclick="toggleLike(this)">
+                            <i class="fas fa-heart">
+                            </i>
+                            Like
+                        </button>
+                        <button>
+                            <i class="fas fa-retweet">
+                            </i>
+                            Retweet
+                        </button>
+                        <button class="button-comment">
+                            <i class="fas fa-comment">
+                            </i>
+                            Comentários
+                        </button>
+                        <button>
+                            <i class="fas fa-share">
+                            </i>
+                            Compartilhar
+                        </button>
+                    </div>
+                    <div class="post-comments">
+                        <div class="comments" >
+                            <div class="post-comment" >
+                                <img class="img-input" alt="Profile Picture"
+                                    src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg"
+                                    width="40" />
+                                <input class="MyComment" placeholder="Responder a Nome"
+                                    style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
+                                    type="text" onblur="this.style.transform='scale(1)'" />
+                            </div>
+                            <div class="post-actions">
+                                <button onclick="addPhoto()">
+                                    <i class="fas fa-image">
+                                    </i>
+                                    Adicionar Fotos
+                                </button>
+                                <button>
+                                    <i class="fas fa-hashtag">
+                                    </i>
+                                    Hashtags
+                                </button>
+                                <button class="publi_comment">
+                                    <i class="fas fa-paper-plane">
+                                    </i>
+                                    Comentar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-box post">
+                    <div class="post-header">
+                        <img alt="Profile Picture" height="40" onclick="expandImage(this)"
+                            src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg"
+                            width="40" />
+                        <div class="post-info">
+                            <span>
+                                Nome de Usuário
+                            </span>
+                            <div class="menu">
+                                <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
+                                </i>
+                                <div class="menu-content">
+                                    <a href="#">
+                                        Acessar Perfil do Usuário
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Conteúdo do post...
+                    </div>
+                    <div class="post-actions">
+                        <button class="like-button" onclick="toggleLike(this)">
+                            <i class="fas fa-heart">
+                            </i>
+                            Like
+                        </button>
+                        <button>
+                            <i class="fas fa-retweet">
+                            </i>
+                            Retweet
+                        </button>
+                        <button class="button-comment">
+                            <i class="fas fa-comment">
+                            </i>
+                            Comentários
+                        </button>
+                        <button>
+                            <i class="fas fa-share">
+                            </i>
+                            Compartilhar
+                        </button>
+                    </div>
+                    <div class="post-comments">
+                        <div class="comments" >
+                            <div class="post-comment" >
+                                <img class="img-input" alt="Profile Picture"
+                                    src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg"
+                                    width="40" />
+                                <input class="MyComment" placeholder="Responder a Nome"
+                                    style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
+                                    type="text" onblur="this.style.transform='scale(1)'" />
+                            </div>
+                            <div class="post-actions">
+                                <button onclick="addPhoto()">
+                                    <i class="fas fa-image">
+                                    </i>
+                                    Adicionar Fotos
+                                </button>
+                                <button>
+                                    <i class="fas fa-hashtag">
+                                    </i>
+                                    Hashtags
+                                </button>
+                                <button class="publi_comment">
+                                    <i class="fas fa-paper-plane">
+                                    </i>
+                                    Comentar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="sidebar-right">
+                <div class="recommended">
+                    <h3>
+                        Recomendados
+                    </h3>
+                    <a href="#">
+                        <i class="fas fa-star">
+                        </i>
+                        Item Recomendado 1
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-star">
+                        </i>
+                        Item Recomendado 2
+                    </a>
+                </div>
+                <div class="hashtags">
+                    <h3>
+                        Hashtags Populares
+                    </h3>
+                    <a href="#">
+                        <i class="fas fa-hashtag">
+                        </i>
+                        #Hashtag1
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-hashtag">
+                        </i>
+                        #Hashtag2
+                    </a>
+                </div>
+                <div class="terms">
+                    <h3>
+                        Termos de Uso
+                    </h3>
+                    <a href="#">
+                        Leia nossos termos de uso
+                    </a>
+                </div>
+            </div>
+        </div>
+        <button class="fixed-button" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up">
+            </i>
+        </button>
+        <script src="postar.js" defer></script>
+        <script>
+            let buttonsRespost = document.querySelectorAll(".button-comment");
+
+            for (let i = 0; i < buttonsRespost.length; i++) {
+                buttonsRespost[i].addEventListener("click", () => {
+                    let respostas = document.querySelectorAll(".comments");
+
+                    console.log(i, buttonsRespost, respostas)
+                    console.log(respostas)
+
+                    if (respostas[i].style.display == "none" || respostas[i].style.display == "") {
+                        respostas[i].style.display = "block";
+                    } else {
+                        respostas[i].style.display = "none";
+                    }
+                })
+            }
+
+            let area_comment = document.querySelectorAll(".post-comment");
+            let buttonPubli = document.querySelectorAll(".publi_comment");
+
+            for (let i = 0; i < area_comment.length; i++) {
+                buttonPubli[i].addEventListener("click", () => {
+                    let comment = document.querySelectorAll(".MyComment")[i];
+                    area_comment[i].insertAdjacentHTML("beforebegin",
+                    `
+                        <div class = "respostas">
+                            <div class="post-header">
+                            <img alt="Profile Picture" height="40" onclick="expandImage(this)" src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg" width="40"/>
+                            <div class="post-info">
+                                <span>
+                                Nome de Usuário
+                                </span>
+                                <div class="menu">
+                                <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
+                                </i>
+                                <div class="menu-content">
+                                <a href="#">
+                                Acessar Perfil do Usuário
+                                </a>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="post-content-comment">
+                            ${comment.value}
+                            </div>
+                            <div class="post-actions-comment">
+                            <button class="like-button" onclick="toggleLike(this)">
+                                <i class="fas fa-heart">
+                                </i>
+                            </button>
+                            <button>
+                                <i class="fas fa-retweet">
+                                </i>
+                            </button>
+                                <button class = "button-comment">
+                                <i class="fas fa-comment">
+                                </i>
+                            </button>
+                            <button>
+                                <i class="fas fa-share">
+                                </i>
+                            </button>
+                            </div>
+                            <div class="post-comments">
+                            <div class="comments">
+                                <div class="post-comment" style="display: flex;justify-content: center;">
+                                    <input placeholder="Responder a Nome" style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;" type="text" onfocus="this.style.transform='scale(1.02)'" onblur="this.style.transform='scale(1)'"/>
+                                </div>
+                                <div class="post-actions">
+                                    <button onclick="addPhoto()">
+                                    <i class="fas fa-image">
+                                    </i>
+                                    Adicionar Fotos
+                                    </button>
+                                    <button>
+                                    <i class="fas fa-hashtag">
+                                    </i>
+                                    Hashtags
+                                    </button>
+                                    <button >
+                                    <i class="fas fa-paper-plane">
+                                    </i>
+                                    Publicar
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
+                            <hr>
+                        </div>
+                    `);
+                    comment.value = ""
+                })
+            }
+
+        </script>
+        <script>
+            function toggleLike(button) {
+                button.classList.toggle('active');
+            }
+
+            // function toggleComments() {
+            //     const commentsSection = document.getElementById("comments")
+
+            //     if (commentsSection.style.display == "none" || commentsSection.style.display == "") {
+            //         commentsSection.style.display = "block";
+            //     } else {
+            //         commentsSection.style.display = "none";
+            //     }
+            // }
+
+            function scrollToTop() {
+                const main = document.getElementById("main-content")
+                main.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            function toggleMenu(menuIcon) {
+                const menuContent = menuIcon.nextElementSibling;
+                menuIcon.classList.toggle('active');
+            }
+
+            function addPhoto() {
+                alert("Adicionar Fotos funcional!");
+            }
+
+            function expandImage(img) {
+                const modal = document.getElementById("imageModal");
+                const modalImg = document.getElementById("modalImage");
+                modal.style.display = "block";
+                modalImg.src = img.src;
+            }
+
+            function closeModal() {
+                const modal = document.getElementById("imageModal");
+                modal.style.display = "none";
+            }
+
+    //         function PubliComment() {
+    //             //  e.preventDefault();
+    //             const area_comment = document.getElementById("post-comment");
+    //             let comment = document.getElementById("MyComment");
+
+    //             area_comment.insertAdjacentHTML("beforebegin",
+    //                 `
+    //   <div class = "respostas">
+    //       <div class="post-header">
+    //        <img alt="Profile Picture" height="40" onclick="expandImage(this)" src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg" width="40"/>
+    //        <div class="post-info">
+    //         <span>
+    //          Nome de Usuário
+    //         </span>
+    //         <div class="menu">
+    //          <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
+    //          </i>
+    //          <div class="menu-content">
+    //           <a href="#">
+    //            Acessar Perfil do Usuário
+    //           </a>
+    //          </div>
+    //         </div>
+    //        </div>
+    //       </div>
+    //       <div class="post-content-comment">
+    //        ${comment.value}
+    //       </div>
+    //       <div class="post-actions-comment">
+    //        <button class="like-button" onclick="toggleLike(this)">
+    //         <i class="fas fa-heart">
+    //         </i>
+    //        </button>
+    //        <button>
+    //         <i class="fas fa-retweet">
+    //         </i>
+    //        </button>
+    //         <button class = "button-comment" onclick="toggleComments()">
+    //         <i class="fas fa-comment">
+    //         </i>
+    //        </button>
+    //        <button>
+    //         <i class="fas fa-share">
+    //         </i>
+    //        </button>
+    //       </div>
+    //       <div class="post-comments">
+    //        <div class="comments">
+    //         <div class="post-comment" style="display: flex;justify-content: center;">
+    //             <input placeholder="Responder a Nome" style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;" type="text" onfocus="this.style.transform='scale(1.02)'" onblur="this.style.transform='scale(1)'"/>
+    //            </div>
+    //         <div class="post-actions">
+    //             <button onclick="addPhoto()">
+    //              <i class="fas fa-image">
+    //              </i>
+    //              Adicionar Fotos
+    //             </button>
+    //             <button>
+    //              <i class="fas fa-hashtag">
+    //              </i>
+    //              Hashtags
+    //             </button>
+    //             <button >
+    //              <i class="fas fa-paper-plane">
+    //              </i>
+    //              Publicar
+    //             </button>
+    //            </div>
+    //        </div>
+    //       </div>
+    //       <hr>
+    //   </div>
+    //          `);
+    //             comment.value = ""
+    //         }
+        </script>
+</body>
+
+</html>
