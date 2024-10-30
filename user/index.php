@@ -1,4 +1,8 @@
-<?php ?>
+<?php 
+    require_once "../core/connection.php";
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -90,7 +94,7 @@
             </div>
         </aside>
         
-        <main class="main-content">
+        <main class="main-content" id="main">
             <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
                 <div class="post-header">
                     <img alt="Profile Picture" height="40" src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg" width="40" />
@@ -110,17 +114,19 @@
                 </div>
                 <div class="post-content">
                     <input type="text" name="content-txt" id="content-txt" required placeholder="O que você está pensando agora?">
+                    <div id="zone-img" class="zone-img">
+                    </div>
                 </div>
                 <div class="post-actions">
                     <label class="entryFile" for="input-File">
                         <i class="fas fa-image"></i>
                         Adicionar Fotos
-                        <input style="display: none;" type="file" multiple name="input-File" id="input-File">
+                        <input style="display: none;" type="file" multiple name="File[]" id="input-File">
                     </label>
-                    <div class="hashtag">
+                    <div class="hashtag" onclick = "toggleMenu()">
                         <i class="fas fa-hashtag"></i>
-                        hashtag
-                        <div class="hashtag-content">
+                        Hashtag
+                        <div style="display: none;" class="hashtag-content" id="hashtag-content">
                             <p>#numero1</p>
                             <p>#numero2</p>
                         </div>
@@ -132,7 +138,7 @@
                 </div>
             </form>
             <div class="content">
-
+                
             </div>
         </main>
         
@@ -182,5 +188,23 @@
         </aside>
     </div>
 
+    <script src="responsive/post-img.js"></script>
+    <script>
+
+        function scrollToTop() {
+            const main = document.getElementById("main");
+            main.scrollTo({top: 0, behavior: "smooth"});
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById("hashtag-content");
+
+            if (menu.style.display == "none" || menu.style.display == "") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
