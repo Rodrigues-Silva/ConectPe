@@ -223,7 +223,8 @@ body {
 
 .ADDPost .post-content {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin-top: 10px;
     transition: background-color 0.5s, box-shadow 0.5s;
 }
@@ -243,13 +244,54 @@ body {
     transform: scale(1.01);
 }
 
+.ADDPost .post-content .zone-img {
+    background-color: transparent;
+    display: flex;
+    /* justify-content: center; */
+    /* height: 22vh; */
+    width: 90%;
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+/* .ADDPost .post-content .zone-img .picture {
+} */
+
+.ADDPost .post-content .zone-img .img-post {
+    height: 22vh;
+    max-width: 600px;
+    border-radius: 10px;
+    border: 0.05px solid rgb(48, 48, 48);
+    margin-left: 10px;
+    object-fit: cover;
+}
+
+.picture {
+    position: relative;
+}
+
+.picture .die-img {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 70%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
 .ADDPost .post-actions {
     display: flex;
-    justify-content: left;
+    justify-content: right;
     align-items: center;
     gap: 30px;
     margin-top: 10px;
-    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .ADDPost .post-actions .entryFile {
@@ -290,8 +332,8 @@ body {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    opacity: 0;
-    /* transform: translateY(-10px); */
+    opacity: 1;
+    border-radius: 10px;
     transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -310,13 +352,12 @@ body {
     background-color: #f0f2f5;
 }
 
-.ADDPost .post-actions .hashtag:hover .hashtag-content{
+/* .ADDPost .post-actions .hashtag .hashtag-content{
     display: block;
     opacity: 1;
-}
+} */
 
 .ADDPost .post-actions button {
-    margin-left: 70%;
     border: none;
     background: none;
     cursor: pointer;
