@@ -20,7 +20,7 @@
 
     $Salt = generateSalt();
 
-    $sql = "INSERT INTO users (name, email, keyword, salt) VALUES (:nome, :email :senha, :salt)";
+    $sql = "INSERT INTO users (name, email, keyword, salt) VALUES (:nome, :email, :senha, :salt)";
     $query = $pdo->prepare($sql);
 
     $query->bindValue(":nome", $Data["Name"]);
