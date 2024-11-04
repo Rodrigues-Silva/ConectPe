@@ -188,7 +188,7 @@
         </aside>
     </div>
 
-    <script src="responsive/post-img.js"></script>
+    <script src="../responsive/post-img.js"></script>
     <script>
 
         function scrollToTop() {
