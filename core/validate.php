@@ -82,10 +82,12 @@ print_r($ErrosS);
 $ExistMail = ExistEmail($pdo, $MetaData["Email"]);
 if ($ExistMail) {
     header("Location: ../user/formLogin.php?errosRegister=" . urlencode("EmailSignup"));
+    exit();
 }
 
 if (ExistName($pdo, $MetaData["Name"])) {
     header("Location: ../user/formLogin.php?errosRegister=" . urlencode("NameSignup"));
+    exit();
 }
 
 if (count($ErrosS) === 0)
@@ -93,8 +95,10 @@ if (count($ErrosS) === 0)
     if ($MetaData["Pass"] !== $MetaData["Confirm"]) {
         $erros_json = json_encode("ConfirmSignup");
         header("Location: ../user/formLogin.php?errosRegister=" . urlencode($erros_json));
+        exit();
     } else {
         header("Location: ../user/insert.php");
+        exit();
     }
 }
 else
