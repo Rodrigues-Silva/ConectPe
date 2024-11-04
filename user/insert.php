@@ -23,9 +23,9 @@
     $sql = "INSERT INTO users (name, email, keyword, salt) VALUES (:nome, :email, :senha, :salt)";
     $query = $pdo->prepare($sql);
 
-    $query->bindValue(":nome", $Data["Name"]);
-    $query->bindValue(":email", $Data['Email']);
-    $query->bindValue(":senha", generatePass($Data["Pass"], $Salt));
+    $query->bindValue(":nome", $MetaData["Name"]);
+    $query->bindValue(":email", $MetaData['Email']);
+    $query->bindValue(":senha", generatePass($MetaData["Pass"], $Salt));
     $query->bindValue(":salt", $Salt);
 
     if ($query->execute()) 
