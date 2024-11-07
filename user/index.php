@@ -1,7 +1,12 @@
 <?php 
     require_once "../core/connection.php";
+    session_start();
 
-
+    if (!isset($_SESSION["ID"]) && empty($_SESSION["ID"]))
+    {
+        header("Location: formLogin.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +55,7 @@
                         <i class="fa-solid fa-circle-question"></i>
                         suporte
                     </a>
-                    <a href="#">
+                    <a href="logout.php">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         sair da conta
                     </a>
@@ -65,7 +70,7 @@
                 <img alt="User Image" height="40"
                     src="https://storage.googleapis.com/a1aa/image/viFtVqbgIa5BFdHfpdfkXVXFzPfoJGVxuqaL739G5I4TnXQnA.jpg"
                     style="border-radius: 50%; margin-right: 10px;" width="40" />
-                Nome de Usuário
+                <?php echo $_SESSION["Name"]?>
             </a>
             <a href="#">
                 <i class="fas fa-user-friends">
@@ -100,7 +105,7 @@
                     <img alt="Profile Picture" height="40" src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg" width="40" />
                     <div class="post-info">
                         <span>
-                            Nome de Usuário
+                            <?php echo $_SESSION["Name"]?>
                         </span>
                         <div class="menu">
                             <i class="fas fa-ellipsis-h"></i>
