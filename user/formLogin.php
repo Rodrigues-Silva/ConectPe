@@ -14,18 +14,18 @@
         <div class="logo">
             <div class="log">
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake h-8 w-8 text-blue-500" data-id="5"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg>
-                <h1>Conect<span class="Pe">Pe</span></h1>
+                <h1>Connect<span class="Pe">Pe</span></h1>
             </div>
             <p> Conecte-se às melhores oportunidades</p>
         </div>
-        <div class="card">
+        <div class="card" id="card">
             <div class="form-docker">
                 <div id="formLogin" class="form-container" >
                     <div class="sep">
                         <h2>Log-In</h2>
                         <p class="p-form">Entre com suas credenciais para acessar sua conta</p>
                     </div>
-                    <form action="session.php" class="login" method="post">
+                    <form action="Login.php" class="login" method="post">
                         <div class="formGroup">
                             <label for="EmailLogin">Email</label>
                             <input  placeholder="Example@email.com" type="email" name="EmailLogin" id="EmailLogin">
@@ -40,7 +40,9 @@
                 <div id="formSign" class="form-container hidden">
                     <h2>Sign-In</h2>
                     <p class="p-form">Crie sua conta e conecte-se</p>
-                    <form action="../core/validate.php" class="Sign" method="post">
+                    <div class="errosG" id="errosG">
+                    </div>
+                    <form action="insert.php" class="Sign" method="POST">
                         <div class="formGroup">
                             <label for="NameSignup">Nome de usuário</label>
                             <input  placeholder="Henrique" type="text" name="NameSignup" id="NameSignup">
@@ -77,13 +79,13 @@
     </div>
 
     <script>
-        const card = document.getElementsByClassName(".card")
+        const card = document.getElementById("card");
         const formLogin = document.getElementById("formLogin");
         const formSignin = document.getElementById("formSign");
         const Button = document.getElementById("changeButton");
         let isLoginForm = true;
 
-        Button.addEventListener("click", () => {
+        function transForm () {
             isLoginForm = !isLoginForm;
             if (isLoginForm) {
                 formLogin.classList.remove("hidden");
@@ -99,7 +101,9 @@
                 Button.textContent = "Já tem uma conta? Entre";
                 console.log(formLogin.classList, formSignin.classList);
             }
-        })
+        }
+
+        Button.addEventListener("click", transForm);
 
         const senhaVerify = document.getElementById("PassSignup");
         let verify = false 
@@ -151,19 +155,45 @@
         document.addEventListener("DOMContentLoaded", ()=> {
             const URL = new URLSearchParams(window.location.search);
             const camposErroS = URL.get("errosRegister");
+            const campoDeErro = document.getElementById("errosG")
             
             // console.log(camposErroS)
             if (camposErroS) {
-                formLogin.classList.add("hidden");
-                formSignin.classList.remove("hidden");
+                campoDeErro.style.display = "block"
+                isLoginForm = true;
+                transForm();
 
                 const campos = JSON.parse(camposErroS);
-                let input = document.getElementById(campos);
-                if (input) {
-                    let erro = document.getElementById("confirmError");
-                    erro.style.display = "block";
-                    input.style.border = "1px solid rgb(236, 52, 52)";
-                    input.style.marginBottom = "0";
+                if (Array.isArray(campos)) {
+                    campos.forEach(campo => {
+                        const twoFase = campo.split(" - ");
+                        const input =document.getElementById(twoFase[0]);
+
+                        if (input) {
+                            input.classList.add("inputErro");
+
+                            let parag =document.createElement("p");
+                            parag.classList.add("verifyG");
+                            parag.innerHTML =twoFase[1];
+
+                            campoDeErro.appendChild(parag);
+                        }
+                    })
+                }
+                else
+                {
+                    const twoFase = campo.split(" - ");
+                    const input =document.getElementById(twoFase[0]);
+
+                    if (input) {
+                        input.classList.add("inputErro");
+
+                        let parag =document.createElement("p");
+                        parag.classList.add("verifyG");
+                        parag.innerHTML =twoFase[1];
+
+                        campoDeErro.appendChild(parag);
+                    }
                 }
             };
     })
