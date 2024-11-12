@@ -21,10 +21,8 @@
         <div class="card" id="card">
             <div class="form-docker">
                 <div id="formLogin" class="form-container" >
-                    <div class="sep">
                         <h2>Log-In</h2>
                         <p class="p-form">Entre com suas credenciais para acessar sua conta</p>
-                    </div>
                     <form action="Login.php" class="login" method="post">
                         <div class="formGroup">
                             <label for="EmailLogin">Email</label>
@@ -38,11 +36,11 @@
                     </form>
                 </div>
                 <div id="formSign" class="form-container hidden">
-                    <h2>Sign-In</h2>
-                    <p class="p-form">Crie sua conta e conecte-se</p>
+                        <h2>Sign-In</h2>
+                        <p class="p-form">Crie sua conta e conecte-se</p>
                     <div class="errosG" id="errosG">
                     </div>
-                    <form action="insert.php" class="Sign" method="POST">
+                    <form action="../core/validate.php" class="Sign" method="POST">
                         <div class="formGroup">
                             <label for="NameSignup">Nome de usuário</label>
                             <input  placeholder="Henrique" type="text" name="NameSignup" id="NameSignup">
@@ -182,7 +180,7 @@
                 }
                 else
                 {
-                    const twoFase = campo.split(" - ");
+                    const twoFase = campos.split(" - ");
                     const input =document.getElementById(twoFase[0]);
 
                     if (input) {
