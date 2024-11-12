@@ -5,7 +5,6 @@ let salvos = []
 
 input.addEventListener("input", () => {
     let files = Array.from(input.files);
-    console.log(files);
     if (files.length > 0) {
         const formate = ["image/jpeg", "image/png", "image/jpg"];
         let erros = [];
@@ -20,19 +19,25 @@ input.addEventListener("input", () => {
                 picture.innerHTML = 
                 `
                     <img draggable="false" class="img-post" src="${URL.createObjectURL(file)}">
-                    <div class="die-img">
+                    <div class="die-img" data-id="${salvos.length}">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
                 `
+
+                picture.querySelector(".die-img").addEventListener("click", (event) => {
+                    const indexToRemove = event.currentTarget.getAttribute("data-index");
+                    salvos.splice(indexToRemove, 1); 
+                    picture.remove(); 
+                });
 
                 local.appendChild(picture);
                 salvos.push(file)
                 post_files += 1;
             }   
         });
-        console.log(salvos)
         if (erros.length > 0 ) {
             alert(`Arquivos com o formato incopativel: ${erros}`)
         }
     }
 })
+//
