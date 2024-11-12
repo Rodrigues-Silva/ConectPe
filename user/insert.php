@@ -1,7 +1,6 @@
 <?php 
     //Arquivos necessarios para a inserção
     require_once "../core/connection.php";
-    require_once "../core/validate.php";
 
     // Inicializar sessão
     session_start();
@@ -29,31 +28,41 @@
         return $id;
     }
 
-
-    $Salt = generateSalt();
-
-    $sql = "INSERT INTO users (name, email, password, salt) VALUES (:nome, :email, :senha, :salt)";
-    $query = $pdo->prepare($sql);
-
-    $query->bindValue(":nome", $MetaData["Name"]);
-    $query->bindValue(":email", $MetaData['Email']);
-    $query->bindValue(":senha", generatePass($MetaData["Pass"], $Salt));
-    $query->bindValue(":salt", $Salt);
-
-    if($query->execute()) 
-    {   
-        $_SESSION["ID"] = getID($pdo, $MetaData["Name"]);
-        $_SESSION["Name"] = $MetaData["Name"];
-        header("Location: index.php");
+    function GetToken ($postData) {
+        return $postData["txtToken1"] . $postData["txtToken2"] . $postData["txtToken3"] . $postData["txtToken4"] . $postData["txtToken5"] . $postData["txtToken6"];
     }
-// ?>
+
+    $token = GetToken($_POST);
+
+    if ($_SESSION["token"] === $token)
+    {
+        $_SESSION["Salt"] = generateSalt();
+
+        $sql = "INSERT INTO users (name, email, password, salt) VALUES (:nome, :email, :senha, :salt)";
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(":nome", $_SESSION["Name"]);
+        $query->bindValue(":email", $_SESSION['Email']);
+        $query->bindValue(":senha", generatePass($_SESSION["Pass"], $_SESSION["Salt"]));
+        $query->bindValue(":salt", $_SESSION["Salt"]);
+
+        if($query->execute()) 
+        {   
+            $_SESSION["ID"] = getID($pdo, $_SESSION["Name"]);
+            header("Location: index.php");
+        }
+    }
+    else
+    {
+
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="PT-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Document</title>
 </head>
 <body>
     
