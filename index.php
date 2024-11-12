@@ -1,5 +1,4 @@
 <?php 
-
     if($_SESSION) 
     {
         header("Location: user/index.php");
@@ -8,3 +7,4 @@
     {
         header("Location: user/formLogin.php");
     }
+    
