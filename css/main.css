@@ -38,7 +38,7 @@ body {
 }
 
 .top-bar .logo .conect {
-    color: rgb(7, 180, 248);
+    color: rgb(59 130 246);
 }
 
 .top-bar .search {
@@ -398,4 +398,8 @@ body {
     border-radius: 10px;
     text-align: center;
     color: #1c1e21;
+}
+
+.text-blue-500 {
+    color: rgb(59 130 246);
 }
