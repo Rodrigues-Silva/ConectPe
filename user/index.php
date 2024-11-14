@@ -39,7 +39,7 @@
             <div class="menu">
                 <i class="fa-solid fa-bars"></i>
                 <div class="menu-content">
-                    <a href="#">
+                    <a href="config.html">
                         <i class="fa-solid fa-gear"></i>    
                         configurações
                     </a>
