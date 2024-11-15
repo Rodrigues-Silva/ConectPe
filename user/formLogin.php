@@ -49,21 +49,23 @@
                             <label for="EmailSignup">Email</label>
                             <input  placeholder="Exemple@email.com" type="email" name="EmailSignup" id="EmailSignup">
                         </div>
-                        <div class="formGroup">
-                            <label for="PassSignup">Senha</label>
-                            <input  placeholder="Crie a sua senha (Example23@)" type="text" name="PassSignup" id="PassSignup">
-                            <div class="erros">
-                                <p class="verify">Senha deve ter 8 caracteres no minimo</p>
-                                <p class="verify">Senha deve ter letras maiusculas</p>
-                                <p class="verify">Senha deve ter numeros</p>
-                                <p class="verify">Senha deve ter caracteres especiais</p>
+                        <div class="campoSenha">
+                            <div class="formGroup">
+                                <label for="PassSignup">Senha</label>
+                                <input class="inputPass" placeholder="Crie a sua senha (Example23@)" type="text" name="PassSignup" id="PassSignup">
+                                <div class="erros">
+                                    <p class="verify">Senha deve ter 8 caracteres no minimo</p>
+                                    <p class="verify">Senha deve ter letras maiusculas</p>
+                                    <p class="verify">Senha deve ter numeros</p>
+                                    <p class="verify">Senha deve ter caracteres especiais</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="formGroup">
-                            <label for="ConfirmSignup">Confirme sua senha</label>
-                            <input  placeholder="Confirme a senha" type="text" name="ConfirmSignup" id="ConfirmSignup">
-                            <div id="confirmError" style="display: none">
-                                <p class="ErroConfirm">Digite a mesma senha criada acima</p>
+                            <div class="formGroup">
+                                <label for="ConfirmSignup">Confirme sua senha</label>
+                                <input class="inputPass" placeholder="Confirme a senha" type="text" name="ConfirmSignup" id="ConfirmSignup">
+                                <div id="confirmError" style="display: none">
+                                    <p class="ErroConfirm">Digite a mesma senha criada acima</p>
+                                </div>
                             </div>
                         </div>
                         <button id="register" type="submit">Cadastrar-se</button>
