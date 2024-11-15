@@ -207,3 +207,29 @@ button:hover {
     background-color: rgba(189, 2, 2, 0.26);
     border: 1px solid rgb(255, 2, 2);
 }
+
+@media (min-width: 992px) and (max-width: 1536px) {
+
+    .card {
+        width: 500px;
+        height: 420px;
+    }
+
+    .UP {
+        width: 650px;
+        height: 550px;
+    }
+
+    .campoSenha {
+        display: flex;
+        gap: 20px;
+    }
+
+    .Sign {
+        width: 600px;
+    }
+
+    .inputPass {
+        width: 290px;
+    }
+}
