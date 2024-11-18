@@ -17,18 +17,25 @@
 
         if (password_verify($_POST["PassLogin"] . $user->salt, $user->password))
         {
+            $_SESSION["Email"] = $user->email;
             $_SESSION["Name"] = $user->name;
             $_SESSION["ID"] = $user->id;
             if ($user->profile_pic)
             {
                 $_SESSION["profile_pic"] = $user->profile_pic;
             }
+            else 
+            {
+                $_SESSION["profile_pic"] = "../Midia/perfil.svg";
+            }
+            $_SESSION["Bio"] = $user->bios;
+            $_SESSION["Link"] = $user->link_profile;
             header("Location: index.php");
             exit();
         }
         else
         {
-            $erro = "Senha digitada incorretamente, caso tenha esquecido sua senha utilize nosso sistema de recuperação de senha, mas se apesnas errou algum digitou clique em voltar para a página anterior e será direcionado para o formulario de login";
+            $erro = "Senha digitada incorretamente, caso tenha esquecido sua senha utilize nosso sistema de recuperação de senha, mas se apenas errou algum digito clique em voltar para a página anterior e será direcionado para o formulario de login";
         }
     }
     else
@@ -44,7 +51,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERRO - Log in</title>
 
-    <link rel="stylesheet" href="../css/erroLogin.css">
+    <link rel="stylesheet" href="../css/erro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
