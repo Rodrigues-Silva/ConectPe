@@ -9,16 +9,16 @@
 
 </head>
 <body>
+    <header>
+        <a href="javascript: history.back();">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left back-button">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+        </a>
+        <h1>Configurações</h1>
+    </header>
     <div class="container">
-        <header>
-            <a href="javascript: history.back();">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left back-button">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                  </svg>
-            </a>
-            <h1>Configurações</h1>
-        </header>
 
         <main>
             <section class="section">
@@ -39,10 +39,7 @@
                         <span class="setting-label">Tema</span>
                     </div>
                     <div class="setting-value">
-                        Claro
-                        <svg class="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
+                        Light Mode
                     </div>
                 </div>
                 <div class="setting-item">
@@ -53,12 +50,11 @@
                         </svg>
                         <span class="setting-label">Idioma</span>
                     </div>
-                    <div class="setting-value">
-                        Português
-                        <svg class="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </div>
+                    <select id="languageSelect">
+                        <option value="Português">Português</option>
+                        <option value="English">English</option>
+                        <option value="Español">Español</option>
+                    </select>
                 </div>
                 <div class="setting-item">
                     <div class="setting-left">
@@ -116,7 +112,7 @@
 
             <section class="dangerZone">
                 <h2 class="section-title dangerH2">Zona de perigo</h2>
-                <div class="setting-item">
+                <div class="setting-item setting-danger-zone">
                     <div class="setting-left">
                         <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
@@ -126,7 +122,7 @@
                     </div>
                     <button class="dangerButton" type="button">Alterar para Privado</button>
                 </div>
-                <div class="setting-item">
+                <form action="delete.php" method="post" class="setting-item setting-danger-zone">
                     <div class="setting-left">
                         <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 6h18"></path>
@@ -137,8 +133,8 @@
                           </svg>
                           <span class="setting-label">Depois da Exclusão da conta, não poderá voltar atrás</span>
                     </div>
-                    <button class="dangerButton" type="button">Excluir conta</button>
-                </div>
+                    <button class="dangerButton" type="submit">Excluir conta</button>
+                </form>
             </section>
 
             <section class="section">
@@ -187,7 +183,8 @@
             </section>
 
             <div class="app-version">
-                App Versão 1.0.0
+                <span>Versão do App 1.0.0</span> <br>
+                <span>© 2024 ConectPE - Todos os direitos reservados.</span>
             </div>
         </main>
     </div>

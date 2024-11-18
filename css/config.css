@@ -16,7 +16,6 @@
     --primary: #4285F4;
     --primary-text: #ffffff;
     --border: #333333;
-    --switch-bg: #4285F4;
     --switch-circle: #ffffff;
 }
 
@@ -41,6 +40,7 @@ body {
 }
 
 header {
+    max-width: 99vw;
     background-color: var(--primary);
     color: var(--primary-text);
     padding: 20px;
@@ -165,6 +165,7 @@ input:checked + .slider:before {
     color: var(--muted-text);
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .dangerZone {
@@ -184,4 +185,30 @@ input:checked + .slider:before {
     border: 1px solid red;
     border-radius: 5px;
     background-color: var(--background);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.dangerButton:hover {
+    background-color: red;
+    color: white;
+}
+
+.setting-danger-zone {
+    cursor: default;
+}
+
+select {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+body.dark-mode select {
+    background-color: #18181b;
+    color: #fff;
+    border-color: #374151;
 }
