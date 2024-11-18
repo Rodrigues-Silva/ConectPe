@@ -1,0 +1,113 @@
+.perfil {
+    display: flex;
+    gap: 20px;
+    padding: 1rem;
+}
+
+.perfil img {
+    border-radius: 50%;
+    max-width: 250px;
+    max-height: 250px;
+    transition: all 0.4s;
+}
+
+.perfil img:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    transform: scale(1.02);
+}
+
+.perfil .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 1rem;
+    width: 800px;
+    gap: 20px;
+}
+
+.editButton {
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 15px;
+    transition: all 0.5s;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+}
+
+.editButton:hover {
+    background-color: rgb(238, 238, 238);
+    transform: scale(1.02);
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.campNav {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    padding: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.posts {
+    margin-top: 20px;
+}
+
+.post-info-perfil {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.creat_at {
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+.post-actions-perfil {
+    display: flex;
+    justify-content: flex-start;
+    gap: 50px;
+    margin-left: 60px;
+}
+
+.post-actions-perfil button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #2d88ff;
+    transition: color 0.3s, transform 0.3s;
+}
+.post-actions-perfil button:hover {
+    color: #1a73e8;
+    transform: scale(1.1);
+}
+.post-actions-perfil button:active {
+    transform: scale(1.2);
+}
+
+.post-content-publi {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.pointer {
+    cursor: default;
+}
+
