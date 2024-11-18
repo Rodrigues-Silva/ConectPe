@@ -6,6 +6,7 @@
     <title>Log-in - ConectPe</title>
 
     <link rel="stylesheet" href="../css/logIn.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
@@ -26,11 +27,11 @@
                     <form action="Login.php" class="login" method="post">
                         <div class="formGroup">
                             <label for="EmailLogin">Email</label>
-                            <input  placeholder="Example@email.com" type="email" name="EmailLogin" id="EmailLogin">
+                            <input required placeholder="Example@email.com" type="email" name="EmailLogin" id="EmailLogin">
                         </div>
                         <div class="formGroup">
                             <label for="PassLogin">Senha</label>
-                            <input  placeholder="Digite sua senha" type="password" name="PassLogin" id="PassLogin">
+                            <div class="input"><input required placeholder="Digite sua senha" type="password" name="PassLogin" id="PassLogin"></div>
                         </div>
                         <button type="submit">Entrar</button>
                     </form>
@@ -43,16 +44,16 @@
                     <form action="../core/validate.php" class="Sign" method="POST">
                         <div class="formGroup">
                             <label for="NameSignup">Nome de usuário</label>
-                            <input  placeholder="Henrique" type="text" name="NameSignup" id="NameSignup">
+                            <input required placeholder="Henrique" type="text" name="NameSignup" id="NameSignup">
                         </div>
                         <div class="formGroup">
                             <label for="EmailSignup">Email</label>
-                            <input  placeholder="Exemple@email.com" type="email" name="EmailSignup" id="EmailSignup">
+                            <input required placeholder="Exemple@email.com" type="email" name="EmailSignup" id="EmailSignup">
                         </div>
                         <div class="campoSenha">
                             <div class="formGroup">
                                 <label for="PassSignup">Senha</label>
-                                <input class="inputPass" placeholder="Crie a sua senha (Example23@)" type="text" name="PassSignup" id="PassSignup">
+                                <input required class="inputPass" placeholder="Crie a sua senha (Example23@)" type="password" name="PassSignup" id="PassSignup">
                                 <div class="erros">
                                     <p class="verify">Senha deve ter 8 caracteres no minimo</p>
                                     <p class="verify">Senha deve ter letras maiusculas</p>
@@ -62,7 +63,7 @@
                             </div>
                             <div class="formGroup">
                                 <label for="ConfirmSignup">Confirme sua senha</label>
-                                <input class="inputPass" placeholder="Confirme a senha" type="text" name="ConfirmSignup" id="ConfirmSignup">
+                                <input required class="inputPass" placeholder="Confirme a senha" type="text" name="ConfirmSignup" id="ConfirmSignup">
                                 <div id="confirmError" style="display: none">
                                     <p class="ErroConfirm">Digite a mesma senha criada acima</p>
                                 </div>
