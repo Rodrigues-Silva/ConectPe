@@ -122,6 +122,7 @@ body {
 }
 
 .menu-content a:hover {
+    cursor: pointer;
     background-color: #f0f2f5;
     border-radius: 10px;
 }
@@ -224,8 +225,11 @@ body {
 .ADDPost .post-content {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px 0;
     transition: background-color 0.5s, box-shadow 0.5s;
 }
 
@@ -402,4 +406,13 @@ body {
 
 .text-blue-500 {
     color: rgb(59 130 246);
+}
+
+.returnMain {
+    text-decoration: none;
+    color: black;
+}
+
+hr {
+    margin: 20px;
 }
