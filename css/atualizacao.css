@@ -1,0 +1,64 @@
+.perfil {
+    display: flex;
+}
+
+.profile_pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 1rem;
+}
+
+.profile_pic img {
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.profile_pic input {
+    opacity: 0;
+}
+
+.menuPic {
+    display: none;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.404);
+    padding: 0.5rem;
+    border-radius: 15px;
+    gap: 2px;
+    background-color: #fff;
+    position: absolute;
+    top: 20rem;
+}
+
+.menuPic label, p {
+    padding: 0.6rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.menuPic label:hover, p:hover {
+    background-color: rgb(243, 242, 242);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 70rem;
+}
+
+.info input, textarea {
+    width: 70%;
+    padding: 0.5rem;
+    border-radius: 15px;
+    border: 1px solid black;
+    font-size: 1rem;
+}
+
+textarea {
+    max-width: 70%;
+    max-height: 40%;
+}
