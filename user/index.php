@@ -62,9 +62,9 @@
 
     <div class="container">
         <aside class="sidebar-left">
-            <a href="#">
+            <a href="perfil.php">
                 <img alt="User Image" height="40"
-                    src="https://storage.googleapis.com/a1aa/image/viFtVqbgIa5BFdHfpdfkXVXFzPfoJGVxuqaL739G5I4TnXQnA.jpg"
+                    src="<?php echo $_SESSION["profile_pic"]; ?>"
                     style="border-radius: 50%; margin-right: 10px;" width="40" />
                 <?php echo $_SESSION["Name"]?>
             </a>
@@ -96,9 +96,11 @@
         </aside>
         
         <main class="main-content" id="main">
-            <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
+        <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
                 <div class="post-header">
-                    <img alt="Profile Picture" height="40" src="https://storage.googleapis.com/a1aa/image/bRrQ9zygscLmOR0DWJc40gRkNjAeLVSnAifQhyC3W9eAHXQnA.jpg" width="40" />
+                    <img alt="User Image" height="40"
+                    src="<?php echo $_SESSION["profile_pic"]; ?>"
+                    style="border-radius: 50%; margin-right: 10px;" width="40" />
                     <div class="post-info">
                         <span>
                             <?php echo $_SESSION["Name"]?>
@@ -124,7 +126,7 @@
                         Adicionar Fotos
                         <input style="display: none;" type="file" multiple name="File[]" id="input-File">
                     </label>
-                    <div class="hashtag" onclick = "toggleMenu()">
+                    <div class="hashtag" id="hashtag" >
                         <i class="fas fa-hashtag"></i>
                         Hashtag
                         <div style="display: none;" class="hashtag-content" id="hashtag-content">
@@ -197,15 +199,30 @@
             main.scrollTo({top: 0, behavior: "smooth"});
         }
 
-        function toggleMenu() {
-            const menu = document.getElementById("hashtag-content");
+        const menuButton =document.getElementById("hashtag");
+        const menu = document.getElementById("hashtag-content");
 
+        function toggleMenu(e) {
             if (menu.style.display == "none" || menu.style.display == "") {
                 menu.style.display = "block";
+                
             } else {
                 menu.style.display = "none";
             }
+            e.stopPropagation();
         }
+
+        menuButton.addEventListener("click", toggleMenu);
+
+        document.addEventListener("click", () => {
+            if (menu.style.display == "block") {
+                menu.style.display = "none";
+            }
+        })
+
+        menu.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
     </script>
 </body>
 </html>
