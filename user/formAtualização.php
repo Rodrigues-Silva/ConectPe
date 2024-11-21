@@ -67,7 +67,7 @@
         <aside class="sidebar-left">
             <a href="javascript: history.back();">
                 <img alt="User Image" height="40"
-                    src="<?php echo "../Midia/perfil.svg"; ?>"
+                    src="<?php echo $_SESSION["profile_pic"]; ?>"
                     style="border-radius: 50%; margin-right: 10px;" width="40" />
                 <?php echo $_SESSION["Name"]?>
             </a>
@@ -99,16 +99,16 @@
         </aside>
         
         <main class="main-content" id="main">
-            <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
+            <form action="update.php" method="post" enctype="multipart/form-data" class="ADDPost">
                 <div class="perfil">
                         <div class="profile_pic">
-                            <img id="picPerfil" src="<?php echo "../Midia/perfil.svg"; ?>" alt="Foto de perfil" height="250" width="250">
-                            <input type="file" name="perfilPic" id="perfilPic" class="perfilPic form-control">
+                            <img id="picPerfil" src="<?php echo $_SESSION["profile_pic"]; ?>" alt="Foto de perfil" height="250" width="250">
+                            <input value="" type="file" name="perfilPic" id="perfilPic" class="perfilPic form-control">
                             <div class="menuPic" id="cp">
                                 <label for="perfilPic">
                                     Alterar Foto 
                                 </label>
-                                <p>
+                                <p id="removePic">
                                     Remover Foto Atual
                                 </p>
                             </div>
@@ -121,11 +121,11 @@
 
                     <div class="info">
                         <input type="text" name="perfilName" id="perfilName" class="perfilName" placeholder="Nome de Usuario" value="<?php echo $_SESSION["Name"] ?>">
-                        <textarea placeholder="Bio" name="perfilBio" id="perfilBio" class="perfilBio" value="<?php echo  $_SESSION["Bio"] ?>"></textarea>
+                        <textarea placeholder="Bio" name="perfilBio" id="perfilBio" class="perfilBio" ><?php echo  $_SESSION["Bio"] ?></textarea>
                         <input placeholder="link" type="text" name="perfilLink" id="perfilLink" class="perfilLink" value="<?php echo $_SESSION["Link"]?>">
                         <div class="functions">
-                            <a href="javascript: history.back();"><button type="reset">Voltar</button></a>
-                            <button type="submit">Salvar</button>
+                            <a class="buttonBack" href="javascript: history.back();">Voltar</a>
+                            <button style="background-color: rgb(59 130 246); color: white;" type="submit">Salvar</button>
                         </div>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
         const pictureProf =document.getElementById("picPerfil");
 
         pictureProf.addEventListener("click", (e)=>{
-            if (pictureProf.src == "http://localhost/ConectPE/Midia/perfil.svg") {
+            if (pictureProf.src == "http://localhost/ConectPE/Midia/perfil.png" || pictureProf.src == "http://localhost/ConectPe/Midia/perfil.png") {
                 const menuPic = document.getElementById("sp")
                 if (menuPic.style.display == "") {
                     menuPic.style.display = "flex"
