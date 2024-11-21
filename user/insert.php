@@ -38,17 +38,19 @@
     {
         $_SESSION["Salt"] = generateSalt();
 
-        $sql = "INSERT INTO users (name, email, password, salt) VALUES (:nome, :email, :senha, :salt)";
+        $sql = "INSERT INTO users (name, email, password, salt, profile_pic) VALUES (:nome, :email, :senha, :salt, :pic)";
         $query = $pdo->prepare($sql);
 
         $query->bindValue(":nome", $_SESSION["Name"]);
         $query->bindValue(":email", $_SESSION['Email']);
         $query->bindValue(":senha", generatePass($_SESSION["Pass"], $_SESSION["Salt"]));
         $query->bindValue(":salt", $_SESSION["Salt"]);
+        $query->bindValue(":pic", "../Midia/perfil.png");
 
         if($query->execute()) 
         {   
             $_SESSION["ID"] = getID($pdo, $_SESSION["Name"]);
+            $_SESSION["profile_pic"] = "../Midia/perfil.png";
             header("Location: index.php");
         }
     }
