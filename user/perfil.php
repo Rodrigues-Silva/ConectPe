@@ -67,7 +67,7 @@
         <aside class="sidebar-left">
             <a class="pointer">
                 <img alt="User Image" height="40"
-                    src="../Midia/perfil.svg"
+                    src="<?php echo $_SESSION["profile_pic"]; ?>"
                     style="border-radius: 50%; margin-right: 10px;" width="40" />
                 <?php echo $_SESSION["Name"]?>
             </a>
@@ -101,11 +101,11 @@
         <main class="main-content" id="main">
         <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
                 <div class="perfil">
-                    <img src="../Midia/perfil.svg" alt="Foto de perfil" height="250" width="250">
+                    <img src="<?php echo $_SESSION["profile_pic"]; ?>" alt="Foto de perfil">
                     <div class="info">
                         <h2><?php echo $_SESSION["Name"]?></h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi voluptate, totam, recusandae laboriosam libero vitae ipsam voluptatibus fuga, porro fugit velit ipsum architecto magnam veniam labore quae earum tempora voluptatem?</p>
-                        <a href="#"><i class="fa-solid fa-link"></i> link:https://exemplo.com</a>
+                        <p><?php echo $_SESSION["Bio"]?></p>
+                        <a href="<?php echo $_SESSION["Link"]?>" target="_blank"><i class="fa-solid fa-link"></i><?php echo $_SESSION["Link"]?></a>
                         <a href="formAtualização.php" class="editButton">Editar Perfil</a>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                     <div class="post-box post">
                         <div class="post-header">
                             <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
+                                src="../Midia/perfil.png"
                                 width="40" />
                             <div class="post-info-perfil">
                                 <div class="info">
@@ -168,7 +168,7 @@
                             <div class="comments" >
                                 <div class="post-comment" >
                                     <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
+                                        src="../Midia/perfil.png"
                                         width="40" />
                                     <input class="MyComment" placeholder="Responder a Nome"
                                         style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
@@ -198,7 +198,7 @@
                     <div class="post-box post">
                         <div class="post-header">
                             <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
+                                src="../Midia/perfil.png"
                                 width="40" />
                             <div class="post-info-perfil">
                                 <div class="info">
@@ -249,7 +249,7 @@
                             <div class="comments" >
                                 <div class="post-comment" >
                                     <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
+                                        src="../Midia/perfil.png"
                                         width="40" />
                                     <input class="MyComment" placeholder="Responder a Nome"
                                         style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
@@ -279,7 +279,7 @@
                     <div class="post-box post">
                         <div class="post-header">
                             <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
+                                src="../Midia/perfil.png"
                                 width="40" />
                             <div class="post-info-perfil">
                                 <div class="info">
@@ -330,7 +330,7 @@
                             <div class="comments" >
                                 <div class="post-comment" >
                                     <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
+                                        src="../Midia/perfil.png"
                                         width="40" />
                                     <input class="MyComment" placeholder="Responder a Nome"
                                         style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
@@ -361,7 +361,7 @@
                 <div class="post-box post">
                         <div class="post-header">
                             <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
+                                src="../Midia/perfil.png"
                                 width="40" />
                             <div class="post-info-perfil">
                                 <div class="info">
@@ -412,7 +412,7 @@
                             <div class="comments" >
                                 <div class="post-comment" >
                                     <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
+                                        src="../Midia/perfil.png"
                                         width="40" />
                                     <input class="MyComment" placeholder="Responder a Nome"
                                         style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
@@ -442,7 +442,7 @@
                     <div class="post-box post">
                         <div class="post-header">
                             <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
+                                src="../Midia/perfil.png"
                                 width="40" />
                             <div class="post-info-perfil">
                                 <div class="info">
@@ -493,7 +493,7 @@
                             <div class="comments" >
                                 <div class="post-comment" >
                                     <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
+                                        src="../Midia/perfil.png"
                                         width="40" />
                                     <input class="MyComment" placeholder="Responder a Nome"
                                         style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
@@ -523,7 +523,7 @@
                     <div class="post-box post">
                         <div class="post-header">
                             <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
+                                src="../Midia/perfil.png"
                                 width="40" />
                             <div class="post-info-perfil">
                                 <div class="info">
@@ -574,7 +574,7 @@
                             <div class="comments" >
                                 <div class="post-comment" >
                                     <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
+                                        src="../Midia/perfil.png"
                                         width="40" />
                                     <input class="MyComment" placeholder="Responder a Nome"
                                         style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
