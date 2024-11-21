@@ -5,9 +5,9 @@
 }
 
 .perfil img {
+    height: 250px;
+    width: 250px;
     border-radius: 50%;
-    max-width: 250px;
-    max-height: 250px;
     transition: all 0.4s;
 }
 
@@ -111,3 +111,9 @@ nav {
     cursor: default;
 }
 
+@media (min-width: 992px) and (max-width: 1536px) {
+    .perfil img {
+        height: 250px;
+        width: 450px;
+    }
+}
