@@ -25,9 +25,10 @@ input.addEventListener("input", () => {
                 `
 
                 picture.querySelector(".die-img").addEventListener("click", (event) => {
-                    const indexToRemove = event.currentTarget.getAttribute("data-index");
+                    const indexToRemove = event.currentTarget.getAttribute("data-id");
                     salvos.splice(indexToRemove, 1); 
                     picture.remove(); 
+                    input.value = "";
                 });
 
                 local.appendChild(picture);
