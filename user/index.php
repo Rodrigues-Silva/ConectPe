@@ -1,12 +1,35 @@
 <?php 
     require_once "../core/connection.php";
     session_start();
+    date_default_timezone_set('America/Sao_Paulo');
+
+    function tempoPassado($dataCriacao) {
+        $agora = new DateTime(); 
+        $criacao = new DateTime($dataCriacao); 
+        $diferenca = $agora->diff($criacao);   
+        // print_r($diferenca);
+        if ($diferenca->d > 0) {
+            return $diferenca->d . ' dia' . ($diferenca->d > 1 ? 's' : '') . ' atrás';
+        } elseif ($diferenca->h > 0) {
+            return $diferenca->h . ' hora' . ($diferenca->h > 1 ? 's' : '') . ' atrás';
+        } elseif ($diferenca->i > 0) {
+            return $diferenca->i . ' minuto' . ($diferenca->i > 1 ? 's' : '') . ' atrás';
+        } else {
+            return 'Agora mesmo';
+        }
+    }
 
     if (!isset($_SESSION["ID"]) && empty($_SESSION["ID"]))
     {
         header("Location: formLogin.php");
         exit();
     }
+
+    $query = "SELECT posts.*, GROUP_CONCAT(midia.media_url SEPARATOR ':') AS img_urls, users.name AS user_name, users.profile_pic AS user_pic FROM posts LEFT JOIN midia ON posts.id = midia.post_id LEFT JOIN users ON posts.user_id = users.id GROUP BY posts.id ORDER BY posts.create_at DESC LIMIT 30;";
+    $consulta =  $pdo->prepare($query);
+    $consulta->execute();
+
+    $posts = $consulta->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +41,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/posts.css">
 
 </head>
 <body>
@@ -96,23 +120,15 @@
         </aside>
         
         <main class="main-content" id="main">
-        <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
+        <form action="../posts/new.php" method="post" enctype="multipart/form-data" class="ADDPost" id="ADDPost">
                 <div class="post-header">
-                    <img alt="User Image" height="40"
+                    <img alt="User Image" height="50"
                     src="<?php echo $_SESSION["profile_pic"]; ?>"
-                    style="border-radius: 50%; margin-right: 10px;" width="40" />
+                    style="border-radius: 50%; margin-right: 10px;" width="50" />
                     <div class="post-info">
                         <span>
                             <?php echo $_SESSION["Name"]?>
                         </span>
-                        <div class="menu">
-                            <i class="fas fa-ellipsis-h"></i>
-                            <div class="menu-content">
-                                <a href="#">
-                                    Acessar Perfil do Usuário
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="post-content">
@@ -141,7 +157,77 @@
                 </div>
             </form>
             <div class="content">
-                
+                <?php foreach($posts as $post) {?>
+                    <div class="post" id="post">
+                        <div class="header">
+                            <img alt="User Image" height="50"
+                            src="<?php echo $post->user_pic ?>"
+                            style="border-radius: 50%; margin-right: 10px;" width="50" />
+                            <div class="post-info">
+                                <div class="title">
+                                    <span>
+                                        <?php echo $post->user_name?>
+                                    </span>
+                                    <span class="time"><?php echo tempoPassado($post->create_at);?></span>
+                                </div>
+                                <div class="menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                    <div class="menu-content">
+                                        <?php if ($post->user_id != $_SESSION["ID"]) {?>
+                                            <a href="perfil.php?fuy=<?php echo $post->user_id?>">
+                                                Acessar Perfil do Usuário
+                                            </a>
+                                        <?php } else {?>
+                                            <a href="../posts/delete.php?fuy=<?php echo $post->id?>" id="removePost" style="color: red;">
+                                                Deletar post
+                                            </a>
+                                        <?php }?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-publi">
+                            <?php echo $post->content;?>
+                            <div class="zone-img">
+                                <?php 
+                                    if ($post->img_urls !== null)
+                                    {
+                                        $imagens = explode(":", $post->img_urls);
+
+                                        foreach ($imagens as $img) {
+                                ?>
+
+                                    <div class="picture">
+                                        <img draggable="false" class="postImg" src="<?php echo "../posts/" . $img?>">
+                                    </div>
+
+                                <?php }} ?>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button class="like-button" onclick="toggleLike(this)">
+                                <i class="fas fa-heart">
+                                </i>
+                                Like
+                            </button>
+                            <button>
+                                <i class="fas fa-retweet">
+                                </i>
+                                Retweet
+                            </button>
+                            <button class="button-comment">
+                                <i class="fas fa-comment">
+                                </i>
+                                Comentários
+                            </button>
+                            <button>
+                                <i class="fas fa-share">
+                                </i>
+                                Compartilhar
+                            </button>
+                        </div>
+                    </div>
+                <?php }?>
             </div>
         </main>
         
@@ -189,9 +275,25 @@
             </i>
         </button>
         </aside>
+
+    </div>
+    <div class="confirm" id="caixa">
+        <div class="caixinha">
+            <header>
+                <h1>Excluir Post</h1>
+            </header>
+            <main>
+                <p>Deseja realmente excluir este post?</p>
+            </main>
+            <footer>
+                <button id="cancel">Cancelar</button>
+                <button id="confirm">Confirmar</button>
+            </footer>
+        </div>
     </div>
 
     <script src="../responsive/post-img.js"></script>
+    <script src="../posts/fetch.js"></script>
     <script>
 
         function scrollToTop() {
