@@ -26,7 +26,7 @@
             }
             else 
             {
-                $_SESSION["profile_pic"] = "../Midia/perfil.svg";
+                $_SESSION["profile_pic"] = "../Midia/perfil.png";
             }
             $_SESSION["Bio"] = $user->bios;
             $_SESSION["Link"] = $user->link_profile;
