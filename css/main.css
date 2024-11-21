@@ -189,7 +189,7 @@ body {
 
 .ADDPost .post-header img {
     border-radius: 50%;
-    width: 40px;
+    width: 45px;
     height: 40px;
     margin-right: 10px;
     cursor: pointer;
@@ -415,4 +415,54 @@ body {
 
 hr {
     margin: 20px;
+}
+
+.confirm {
+    height: 100dvh;
+    width: 100dvw;
+    background-color: rgba(0, 0, 0, 0.301);
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm header {
+    background-color: #60656b;
+    padding: 1.5rem;
+    border-radius: 15px 15px 0 0;
+    color: rgba(255, 255, 255, 0.705);
+}
+
+.confirm main {
+    background-color: rgba(255, 255, 255, 0.801);
+    padding: 1.5rem;
+}
+
+.confirm footer {
+    border-top: #e8f0fe;
+    background-color: #60656b;
+    padding: 1.5rem;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.confirm footer button {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.171);
+    transition: all 0.4s;
+}
+
+.confirm footer button:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+#confirm {
+    background-color: rgb(185, 57, 57);
+    color: #e8f0fe;
 }
