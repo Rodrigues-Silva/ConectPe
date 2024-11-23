@@ -21,3 +21,10 @@ As extenções compativeis são:
         }
     }
 })
+//
+const remove = document.getElementById("removePic");
+
+remove.addEventListener("click", ()=>{
+    input.value = "";
+    perfil.src = "../Midia/perfil.png";
+})
