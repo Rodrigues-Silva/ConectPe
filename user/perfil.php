@@ -1,12 +1,36 @@
 <?php 
     require_once "../core/connection.php";
     session_start();
+    date_default_timezone_set('America/Sao_Paulo');
+
+    function tempoPassado($dataCriacao) {
+        $agora = new DateTime(); 
+        $criacao = new DateTime($dataCriacao); 
+        $diferenca = $agora->diff($criacao);   
+        // print_r($diferenca);
+        if ($diferenca->d > 0) {
+            return $diferenca->d . ' dia' . ($diferenca->d > 1 ? 's' : '') . ' atrás';
+        } elseif ($diferenca->h > 0) {
+            return $diferenca->h . ' hora' . ($diferenca->h > 1 ? 's' : '') . ' atrás';
+        } elseif ($diferenca->i > 0) {
+            return $diferenca->i . ' minuto' . ($diferenca->i > 1 ? 's' : '') . ' atrás';
+        } else {
+            return 'Agora mesmo';
+        }
+    }
 
     if (!isset($_SESSION["ID"]) && empty($_SESSION["ID"]))
     {
         header("Location: formLogin.php");
         exit();
     }
+
+    $query = "SELECT posts.*, GROUP_CONCAT(midia.media_url SEPARATOR ':') AS img_urls FROM posts LEFT JOIN midia ON posts.id = midia.post_id WHERE user_id = :id_user GROUP BY posts.id ORDER BY posts.create_at DESC";
+    $consulta = $pdo->prepare($query);
+    $consulta->bindParam(":id_user", $_SESSION["ID"], PDO::PARAM_STR);
+    $consulta->execute();
+
+    $posts = $consulta->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +43,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/perfil.css">
+    <link rel="stylesheet" href="../css/posts.css">
 
 </head>
 <body>
@@ -67,9 +92,9 @@
         <aside class="sidebar-left">
             <a class="pointer">
                 <img alt="User Image" height="40"
-                    src="../Midia/perfil.svg"
+                    src="<?php echo $_SESSION["profile_pic"]; ?>"
                     style="border-radius: 50%; margin-right: 10px;" width="40" />
-                <?php echo $_SESSION["Name"]?>
+                <?php echo $_SESSION["Name"]; ?>
             </a>
             <a href="#">
                 <i class="fas fa-user-friends">
@@ -96,520 +121,95 @@
                     Espaço para Anúncios
                 </p>
             </div>
+            <button class="anun" type="button">
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                Anunciar
+            </button>
         </aside>
         
         <main class="main-content" id="main">
         <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
                 <div class="perfil">
-                    <img src="../Midia/perfil.svg" alt="Foto de perfil" height="250" width="250">
+                    <img src="<?php echo $_SESSION["profile_pic"]; ?>" alt="Foto de perfil">
                     <div class="info">
-                        <h2><?php echo $_SESSION["Name"]?></h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi voluptate, totam, recusandae laboriosam libero vitae ipsam voluptatibus fuga, porro fugit velit ipsum architecto magnam veniam labore quae earum tempora voluptatem?</p>
-                        <a href="#"><i class="fa-solid fa-link"></i> link:https://exemplo.com</a>
+                        <h2><?php echo $_SESSION["Name"]; ?></h2>
+                        <p><?php echo $_SESSION["Bio"];?></p>
+                        <a href="<?php echo $_SESSION["Link"]?>" target="_blank"><i class="fa-solid fa-link"></i><?php echo $_SESSION["Link"]?></a>
                         <a href="formAtualização.php" class="editButton">Editar Perfil</a>
                     </div>
                 </div>
                 <nav>
-                    <div class="campNav">Posts</div>
-                    <div class="campNav">Republicados</div>
+                    <div class="campNav" id="publi">Posts</div>
+                    <div class="campNav" id="retw">Republicados</div>
                 </nav>
-                <div class="posts">
-                    <div class="post-box post">
-                        <div class="post-header">
-                            <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
-                                width="40" />
-                            <div class="post-info-perfil">
-                                <div class="info">
-                                    <span class="name">
-                                        Nome de Usuário
-                                    </span>
-                                    <span class="creat_at">
-                                        data e hora
-                                    </span>
-                                </div>
-                                <div class="menu">
-                                    <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
-                                    </i>
-                                    <div class="menu-content">
-                                        <a href="#">
-                                            Excluir post
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-content-publi">
-                            Conteúdo do post...
-                        </div>
-                        <div class="post-actions-perfil">
-                            <button class="like-button" onclick="toggleLike(this)">
-                                <i class="fas fa-heart">
-                                </i>
-                                Like
-                            </button>
-                            <button>
-                                <i class="fas fa-retweet">
-                                </i>
-                                Retweet
-                            </button>
-                            <button class="button-comment">
-                                <i class="fas fa-comment">
-                                </i>
-                                Comentários
-                            </button>
-                            <button>
-                                <i class="fas fa-share">
-                                </i>
-                                Compartilhar
-                            </button>
-                        </div>
-                        <div class="post-comments" style="display: none">
-                            <div class="comments" >
-                                <div class="post-comment" >
-                                    <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
-                                        width="40" />
-                                    <input class="MyComment" placeholder="Responder a Nome"
-                                        style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
-                                        type="text" onblur="this.style.transform='scale(1)'" />
-                                </div>
-                                <div class="post-actions">
-                                    <button onclick="addPhoto()">
-                                        <i class="fas fa-image">
-                                        </i>
-                                        Adicionar Fotos
-                                    </button>
-                                    <button>
-                                        <i class="fas fa-hashtag">
-                                        </i>
-                                        Hashtags
-                                    </button>
-                                    <button class="publi_comment">
-                                        <i class="fas fa-paper-plane">
-                                        </i>
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-box post">
-                        <div class="post-header">
-                            <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
-                                width="40" />
-                            <div class="post-info-perfil">
-                                <div class="info">
-                                    <span class="name">
-                                        Nome de Usuário
-                                    </span>
-                                    <span class="creat_at">
-                                        data e hora
-                                    </span>
-                                </div>
-                                <div class="menu">
-                                    <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
-                                    </i>
-                                    <div class="menu-content">
-                                        <a href="#">
-                                            Excluir post
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-content-publi">
-                            Conteúdo do post...
-                        </div>
-                        <div class="post-actions-perfil">
-                            <button class="like-button" onclick="toggleLike(this)">
-                                <i class="fas fa-heart">
-                                </i>
-                                Like
-                            </button>
-                            <button>
-                                <i class="fas fa-retweet">
-                                </i>
-                                Retweet
-                            </button>
-                            <button class="button-comment">
-                                <i class="fas fa-comment">
-                                </i>
-                                Comentários
-                            </button>
-                            <button>
-                                <i class="fas fa-share">
-                                </i>
-                                Compartilhar
-                            </button>
-                        </div>
-                        <div class="post-comments" style="display: none">
-                            <div class="comments" >
-                                <div class="post-comment" >
-                                    <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
-                                        width="40" />
-                                    <input class="MyComment" placeholder="Responder a Nome"
-                                        style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
-                                        type="text" onblur="this.style.transform='scale(1)'" />
-                                </div>
-                                <div class="post-actions">
-                                    <button onclick="addPhoto()">
-                                        <i class="fas fa-image">
-                                        </i>
-                                        Adicionar Fotos
-                                    </button>
-                                    <button>
-                                        <i class="fas fa-hashtag">
-                                        </i>
-                                        Hashtags
-                                    </button>
-                                    <button class="publi_comment">
-                                        <i class="fas fa-paper-plane">
-                                        </i>
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-box post">
-                        <div class="post-header">
-                            <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
-                                width="40" />
-                            <div class="post-info-perfil">
-                                <div class="info">
-                                    <span class="name">
-                                        Nome de Usuário
-                                    </span>
-                                    <span class="creat_at">
-                                        data e hora
-                                    </span>
-                                </div>
-                                <div class="menu">
-                                    <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
-                                    </i>
-                                    <div class="menu-content">
-                                        <a href="#">
-                                            Excluir post
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-content-publi">
-                            Conteúdo do post...
-                        </div>
-                        <div class="post-actions-perfil">
-                            <button class="like-button" onclick="toggleLike(this)">
-                                <i class="fas fa-heart">
-                                </i>
-                                Like
-                            </button>
-                            <button>
-                                <i class="fas fa-retweet">
-                                </i>
-                                Retweet
-                            </button>
-                            <button class="button-comment">
-                                <i class="fas fa-comment">
-                                </i>
-                                Comentários
-                            </button>
-                            <button>
-                                <i class="fas fa-share">
-                                </i>
-                                Compartilhar
-                            </button>
-                        </div>
-                        <div class="post-comments" style="display: none">
-                            <div class="comments" >
-                                <div class="post-comment" >
-                                    <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
-                                        width="40" />
-                                    <input class="MyComment" placeholder="Responder a Nome"
-                                        style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
-                                        type="text" onblur="this.style.transform='scale(1)'" />
-                                </div>
-                                <div class="post-actions">
-                                    <button onclick="addPhoto()">
-                                        <i class="fas fa-image">
-                                        </i>
-                                        Adicionar Fotos
-                                    </button>
-                                    <button>
-                                        <i class="fas fa-hashtag">
-                                        </i>
-                                        Hashtags
-                                    </button>
-                                    <button class="publi_comment">
-                                        <i class="fas fa-paper-plane">
-                                        </i>
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="post-box post">
-                        <div class="post-header">
-                            <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
-                                width="40" />
-                            <div class="post-info-perfil">
-                                <div class="info">
-                                    <span class="name">
-                                        Nome de Usuário
-                                    </span>
-                                    <span class="creat_at">
-                                        data e hora
-                                    </span>
-                                </div>
-                                <div class="menu">
-                                    <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
-                                    </i>
-                                    <div class="menu-content">
-                                        <a href="#">
-                                            Excluir post
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-content-publi">
-                            Conteúdo do post...
-                        </div>
-                        <div class="post-actions-perfil">
-                            <button class="like-button" onclick="toggleLike(this)">
-                                <i class="fas fa-heart">
-                                </i>
-                                Like
-                            </button>
-                            <button>
-                                <i class="fas fa-retweet">
-                                </i>
-                                Retweet
-                            </button>
-                            <button class="button-comment">
-                                <i class="fas fa-comment">
-                                </i>
-                                Comentários
-                            </button>
-                            <button>
-                                <i class="fas fa-share">
-                                </i>
-                                Compartilhar
-                            </button>
-                        </div>
-                        <div class="post-comments" style="display: none">
-                            <div class="comments" >
-                                <div class="post-comment" >
-                                    <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
-                                        width="40" />
-                                    <input class="MyComment" placeholder="Responder a Nome"
-                                        style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
-                                        type="text" onblur="this.style.transform='scale(1)'" />
-                                </div>
-                                <div class="post-actions">
-                                    <button onclick="addPhoto()">
-                                        <i class="fas fa-image">
-                                        </i>
-                                        Adicionar Fotos
-                                    </button>
-                                    <button>
-                                        <i class="fas fa-hashtag">
-                                        </i>
-                                        Hashtags
-                                    </button>
-                                    <button class="publi_comment">
-                                        <i class="fas fa-paper-plane">
-                                        </i>
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-box post">
-                        <div class="post-header">
-                            <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
-                                width="40" />
-                            <div class="post-info-perfil">
-                                <div class="info">
-                                    <span class="name">
-                                        Nome de Usuário
-                                    </span>
-                                    <span class="creat_at">
-                                        data e hora
-                                    </span>
-                                </div>
-                                <div class="menu">
-                                    <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
-                                    </i>
-                                    <div class="menu-content">
-                                        <a href="#">
-                                            Excluir post
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-content-publi">
-                            Conteúdo do post...
-                        </div>
-                        <div class="post-actions-perfil">
-                            <button class="like-button" onclick="toggleLike(this)">
-                                <i class="fas fa-heart">
-                                </i>
-                                Like
-                            </button>
-                            <button>
-                                <i class="fas fa-retweet">
-                                </i>
-                                Retweet
-                            </button>
-                            <button class="button-comment">
-                                <i class="fas fa-comment">
-                                </i>
-                                Comentários
-                            </button>
-                            <button>
-                                <i class="fas fa-share">
-                                </i>
-                                Compartilhar
-                            </button>
-                        </div>
-                        <div class="post-comments" style="display: none">
-                            <div class="comments" >
-                                <div class="post-comment" >
-                                    <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
-                                        width="40" />
-                                    <input class="MyComment" placeholder="Responder a Nome"
-                                        style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
-                                        type="text" onblur="this.style.transform='scale(1)'" />
-                                </div>
-                                <div class="post-actions">
-                                    <button onclick="addPhoto()">
-                                        <i class="fas fa-image">
-                                        </i>
-                                        Adicionar Fotos
-                                    </button>
-                                    <button>
-                                        <i class="fas fa-hashtag">
-                                        </i>
-                                        Hashtags
-                                    </button>
-                                    <button class="publi_comment">
-                                        <i class="fas fa-paper-plane">
-                                        </i>
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-box post">
-                        <div class="post-header">
-                            <img alt="Profile Picture" height="40" onclick="expandImage(this)"
-                                src="../Midia/perfil.svg"
-                                width="40" />
-                            <div class="post-info-perfil">
-                                <div class="info">
-                                    <span class="name">
-                                        Nome de Usuário
-                                    </span>
-                                    <span class="creat_at">
-                                        data e hora
-                                    </span>
-                                </div>
-                                <div class="menu">
-                                    <i class="fas fa-ellipsis-h" onclick="toggleMenu(this)">
-                                    </i>
-                                    <div class="menu-content">
-                                        <a href="#">
-                                            Excluir post
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-content-publi">
-                            Conteúdo do post...
-                        </div>
-                        <div class="post-actions-perfil">
-                            <button class="like-button" onclick="toggleLike(this)">
-                                <i class="fas fa-heart">
-                                </i>
-                                Like
-                            </button>
-                            <button>
-                                <i class="fas fa-retweet">
-                                </i>
-                                Retweet
-                            </button>
-                            <button class="button-comment">
-                                <i class="fas fa-comment">
-                                </i>
-                                Comentários
-                            </button>
-                            <button>
-                                <i class="fas fa-share">
-                                </i>
-                                Compartilhar
-                            </button>
-                        </div>
-                        <div class="post-comments" style="display: none">
-                            <div class="comments" >
-                                <div class="post-comment" >
-                                    <img class="img-input" alt="Profile Picture"
-                                        src="../Midia/perfil.svg"
-                                        width="40" />
-                                    <input class="MyComment" placeholder="Responder a Nome"
-                                        style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;"
-                                        type="text" onblur="this.style.transform='scale(1)'" />
-                                </div>
-                                <div class="post-actions">
-                                    <button onclick="addPhoto()">
-                                        <i class="fas fa-image">
-                                        </i>
-                                        Adicionar Fotos
-                                    </button>
-                                    <button>
-                                        <i class="fas fa-hashtag">
-                                        </i>
-                                        Hashtags
-                                    </button>
-                                    <button class="publi_comment">
-                                        <i class="fas fa-paper-plane">
-                                        </i>
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                <div class="republi"></div>
             </form>
+            <div class="posts">
+            <?php foreach($posts as $post) {?>
+                    <div class="post" id="post" data-id="<?php echo $post->$id?>">
+                        <div class="header">
+                            <img alt="User Image" height="50"
+                            src="<?php echo $_SESSION["profile_pic"] ?>"
+                            style="border-radius: 50%; margin-right: 10px;" width="50" />
+                            <div class="post-info">
+                                <div class="title">
+                                    <span>
+                                        <?php echo $_SESSION["Name"]?>
+                                    </span>
+                                    <span class="time"><?php echo tempoPassado($post->create_at);?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-publi">
+                            <?php echo $post->content;?>
+                            <div class="zone-img">
+                                <?php 
+                                    if ($post->img_urls !== null)
+                                    {
+                                        $imagens = explode(":", $post->img_urls);
+
+                                        foreach ($imagens as $img) {
+                                ?>
+
+                                    <div class="picture">
+                                        <img draggable="false" class="postImg" src="<?php echo "../posts/" . $img?>">
+                                    </div>
+
+                                <?php }} ?>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button class="like-button" onclick="toggleLike(this)">
+                                <i class="fas fa-heart">
+                                </i>
+                                Like
+                            </button>
+                            <button>
+                                <i class="fas fa-retweet">
+                                </i>
+                                Retweet
+                            </button>
+                            <button class="button-comment">
+                                <i class="fas fa-comment">
+                                </i>
+                                Comentários
+                            </button>
+                            <button>
+                                <i class="fas fa-share">
+                                </i>
+                                Compartilhar
+                            </button>
+                        </div>
+                    </div>
+                <?php }?>
+            </div>
+            <div class="republi"></div>
         </main>
         
         <aside class="sidebar-right">
+            <h3>
+                Recomendados
+            </h3>
                 <div class="recommended">
-                    <h3>
-                        Recomendados
-                    </h3>
                     <a href="#">
                         <i class="fas fa-star">
                         </i>
@@ -621,10 +221,10 @@
                         Item Recomendado 2
                     </a>
                 </div>
+                <h3>
+                    Hashtags Populares
+                </h3>
                 <div class="hashtags">
-                    <h3>
-                        Hashtags Populares
-                    </h3>
                     <a href="#">
                         <i class="fas fa-hashtag">
                         </i>
@@ -637,12 +237,9 @@
                     </a>
                 </div>
                 <div class="terms">
-                    <h3>
-                        Termos de Uso
-                    </h3>
-                    <a href="#">
-                        Leia nossos termos de uso
-                    </a>
+                    <p id="p_term"><a id="term" href="../terms.html" target="_blank">Termos de Uso</a> - <a id="term" class="term" href="../policy.html" target="_blank">Politica de privacidade</a></p>
+                    <p id="p_term">Versão do App 1.0.0</p>
+                    <p id="p_term">© 2024 ConectPE - Todos os direitos reservados.</p>
                 </div>
         <button class="fixed-button" onclick="scrollToTop()">
             <i class="fas fa-arrow-up">
@@ -652,6 +249,7 @@
     </div>
 
     <script src="../responsive/post-img.js"></script>
+    <script src="../responsive/posts-perfil.js"></script>
     <script>
 
         function scrollToTop() {
