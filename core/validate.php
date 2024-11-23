@@ -131,14 +131,38 @@
                     $mail->addAddress($_SESSION["Email"]);
             
                     $mail->isHTML(true);
-                    $mail->Subject = "Teste de E-mail";
-                    $mail->Body = "Chegou o Email Token:" . $_SESSION["token"];
+                    $mail->Subject = "Código de Autenticação";
+                    $mail->Body = '
+                    <html>
+                    <head></head>
+                    <body>
+                        <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+                            <div style="max-width: 600px; margin: auto; background-color: #ffffff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+                                <div style="width: 100%; background-color: rgb(59 130 246); padding: 25px; text-align: center; border-radius: 8px 8px 0 0; color: white; font-size: 24px; font-weight: bold;">
+                                    <h1 style = "color: rgb(59 130 246);">ConectPE</h1>
+                                </div>
+                                <div style="padding: 20px;">
+                                    <p>Olá, ' . $_SESSION["Name"] ."</p>
+                                    <p>Utilize o código a seguir para finalizar seu cadastro.</p>
+                                    <div style='font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center; margin: 20px 0;'>" . $_SESSION["token"] ."</div>
+                                    <p>Caso você não tenha solicitado este código, poderá ignorar com segurança este email. Outra pessoa pode ter digitado seu endereço de email por engano.</p>
+                                    <p>Obrigado, " . $_SESSION["Name"] ."<br>Equipe de contas da ConectPe.</p>
+        
+                                </div>
+                                <div style='text-align: center; font-size: 12px; color: #aaaaaa; padding: 10px;'>
+                                    <p>&copy; 2024 ConectPe. Todos os direitos reservados.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </body>
+                    </html>";
+                    $mail->AltBody = "Recebeu email";
             
-                    if ($mail->send()) {
-                        print_r($_SESSION);
-                    } else {
+                    if (!$mail->send()) {
                         $erro[] =  " Email não enviado";
-                    }
+                    } 
+                    print_r($_SESSION);
+
                 } catch (Exception $e) {
                     $erros_json = json_encode("Erro ao enviar menssagem: {$mail->ErrorInfo}");
                     header("Location: ../user/formLogin.php?errosRegister=" . urlencode($erros_json));
@@ -185,12 +209,12 @@
             <p class="title">Enviado para <?php echo $_SESSION["Email"]?></p>
             <h4>Insira o token para finalizar</h4>
                 <div class="inputs">
-                    <input type="text" name="txtToken1" id="txtToken">
-                    <input type="text" name="txtToken2" id="txtToken">
-                    <input type="text" name="txtToken3" id="txtToken">
-                    <input type="text" name="txtToken4" id="txtToken">
-                    <input type="text" name="txtToken5" id="txtToken">
-                    <input type="text" name="txtToken6" id="txtToken">            
+                    <input maxlength="1" class="txtToken" type="text" name="txtToken1" id="txtToken">
+                    <input maxlength="1" class="txtToken" type="text" name="txtToken2" id="txtToken">
+                    <input maxlength="1" class="txtToken" type="text" name="txtToken3" id="txtToken">
+                    <input maxlength="1" class="txtToken" type="text" name="txtToken4" id="txtToken">
+                    <input maxlength="1" class="txtToken" type="text" name="txtToken5" id="txtToken">
+                    <input maxlength="1" class="txtToken" type="text" name="txtToken6" id="txtToken">            
                 </div>
                 <div class="finally">
                     <a href="javascript:location.reload();">
@@ -202,11 +226,38 @@
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
-            <p class="terms">Ao clicar em Confirmar, você concorda com os <a href="">Termos de Uso</a> e <a href="#">Politica de Privacidade</a> da ConectPe</p>
+            <p class="terms">Ao clicar em Confirmar, você concorda com os <a href="../terms.html" target="_blank">Termos de Uso</a> e <a href="../policy.html" target="_blank">Politica de Privacidade</a> da ConectPe</p>
             <p class="garaty"><i class="fa-solid fa-lock"></i>Ambiente seguro ConectPe</p>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", ()=>{
+            const inputs = document.querySelectorAll(".txtToken");
 
+            function focusCorrectInput(currentIndex) {
+                for (let i = 0; i <= currentIndex; i++) {
+                    if (inputs[i].value === "") {
+                        inputs[i].focus();
+                        return;
+                    }
+                }
+            }
+
+            inputs.forEach((input, index) => {
+                input.addEventListener("input", ()=>{
+                    if (input.value !== "" && index < inputs.length - 1) {
+                        inputs[index+1].focus()
+                    }
+                })
+
+                input.addEventListener("focus", ()=>{
+                    focusCorrectInput(index);
+                })
+            })
+
+            inputs[0].focus();
+        })
+    </script>
 </body>
 </html>
     
