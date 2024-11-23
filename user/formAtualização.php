@@ -67,7 +67,7 @@
         <aside class="sidebar-left">
             <a href="javascript: history.back();">
                 <img alt="User Image" height="40"
-                    src="<?php echo "../Midia/perfil.svg"; ?>"
+                    src="<?php echo $_SESSION["profile_pic"]; ?>"
                     style="border-radius: 50%; margin-right: 10px;" width="40" />
                 <?php echo $_SESSION["Name"]?>
             </a>
@@ -96,19 +96,23 @@
                     Espaço para Anúncios
                 </p>
             </div>
+            <button class="anun" type="button">
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                Anunciar
+            </button>
         </aside>
         
         <main class="main-content" id="main">
-            <form action="" method="post" enctype="multipart/form-data" class="ADDPost">
+            <form action="update.php" method="post" enctype="multipart/form-data" class="ADDPost">
                 <div class="perfil">
                         <div class="profile_pic">
-                            <img id="picPerfil" src="<?php echo "../Midia/perfil.svg"; ?>" alt="Foto de perfil" height="250" width="250">
+                            <img id="picPerfil" src="<?php echo $_SESSION["profile_pic"]; ?>" alt="Foto de perfil" height="250" width="250">
                             <input type="file" name="perfilPic" id="perfilPic" class="perfilPic form-control">
                             <div class="menuPic" id="cp">
                                 <label for="perfilPic">
                                     Alterar Foto 
                                 </label>
-                                <p>
+                                <p id="removePic">
                                     Remover Foto Atual
                                 </p>
                             </div>
@@ -121,11 +125,11 @@
 
                     <div class="info">
                         <input type="text" name="perfilName" id="perfilName" class="perfilName" placeholder="Nome de Usuario" value="<?php echo $_SESSION["Name"] ?>">
-                        <textarea placeholder="Bio" name="perfilBio" id="perfilBio" class="perfilBio" value="<?php echo  $_SESSION["Bio"] ?>"></textarea>
+                        <textarea placeholder="Bio" name="perfilBio" id="perfilBio" class="perfilBio" ><?php echo  $_SESSION["Bio"] ?></textarea>
                         <input placeholder="link" type="text" name="perfilLink" id="perfilLink" class="perfilLink" value="<?php echo $_SESSION["Link"]?>">
                         <div class="functions">
-                            <a href="javascript: history.back();"><button type="reset">Voltar</button></a>
-                            <button type="submit">Salvar</button>
+                            <a class="buttonBack" href="javascript: history.back();">Voltar</a>
+                            <button style="background-color: rgb(59 130 246); color: white;" type="submit">Salvar</button>
                         </div>
                     </div>
                 </div>
@@ -133,10 +137,10 @@
         </main>
         
         <aside class="sidebar-right">
+            <h3>
+                Recomendados
+            </h3>
                 <div class="recommended">
-                    <h3>
-                        Recomendados
-                    </h3>
                     <a href="#">
                         <i class="fas fa-star">
                         </i>
@@ -148,10 +152,10 @@
                         Item Recomendado 2
                     </a>
                 </div>
+                <h3>
+                    Hashtags Populares
+                </h3>
                 <div class="hashtags">
-                    <h3>
-                        Hashtags Populares
-                    </h3>
                     <a href="#">
                         <i class="fas fa-hashtag">
                         </i>
@@ -164,12 +168,9 @@
                     </a>
                 </div>
                 <div class="terms">
-                    <h3>
-                        Termos de Uso
-                    </h3>
-                    <a href="#">
-                        Leia nossos termos de uso
-                    </a>
+                    <p id="p_term"><a id="term" href="../terms.html" target="_blank">Termos de Uso</a> - <a id="term" class="term" href="../policy.html" target="_blank">Politica de privacidade</a></p>
+                    <p id="p_term">Versão do App 1.0.0</p>
+                    <p id="p_term">© 2024 ConectPE - Todos os direitos reservados.</p>
                 </div>
         <button class="fixed-button" onclick="scrollToTop()">
             <i class="fas fa-arrow-up">
@@ -189,7 +190,7 @@
         const pictureProf =document.getElementById("picPerfil");
 
         pictureProf.addEventListener("click", (e)=>{
-            if (pictureProf.src == "http://localhost/ConectPE/Midia/perfil.svg") {
+            if (pictureProf.src == "http://localhost/ConectPE/Midia/perfil.png" || pictureProf.src == "http://localhost/ConectPe/Midia/perfil.png") {
                 const menuPic = document.getElementById("sp")
                 if (menuPic.style.display == "") {
                     menuPic.style.display = "flex"
