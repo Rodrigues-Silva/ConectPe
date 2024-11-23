@@ -133,3 +133,11 @@ h2 {
     gap: 5px;
     color: #4b5563b4;
 }
+
+@media (min-width: 992px) and (max-width: 1536px) {
+
+    .card {
+        width: 500px;
+        height: 480px;
+    }
+}
