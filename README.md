@@ -1,7 +1,7 @@
 
 <div align="center">
 
-<img src="Midia/icon.jpeg" alt="Logo do ConectPe" width="250">
+<img src="Midia/icon.png" alt="Logo do ConectPe" width="250">
 
   <h1 align="center">ConectPe</h1>
 
