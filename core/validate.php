@@ -161,7 +161,6 @@
                     if (!$mail->send()) {
                         $erro[] =  " Email não enviado";
                     } 
-                    print_r($_SESSION);
 
                 } catch (Exception $e) {
                     $erros_json = json_encode("Erro ao enviar menssagem: {$mail->ErrorInfo}");
