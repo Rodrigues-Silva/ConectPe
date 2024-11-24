@@ -1,0 +1,17 @@
+{
+    "name": "vinicius-rodrigues/conect-pe",
+    "autoload": {
+        "psr-4": {
+            "ViniciusRodrigues\\ConectPe\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vinícius Rodrigues",
+            "email": "rodriguesdasilvav408@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
