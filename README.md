@@ -123,6 +123,6 @@ O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. 
 
 
 ## Licença
-Este projeto está licenciado sob a **MIT License**. Para mais detalhes, consulte o arquivo `LICENSE`.
+Este projeto está licenciado sob a **MIT License**. Para mais detalhes, consulte o arquivo [LICENSE](LICENSE)
 
 
