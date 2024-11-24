@@ -1,3 +1,4 @@
+
 <div align="center">
 
 <img src="Midia/icon.jpeg" alt="Logo do ConectPe" width="250">
@@ -19,6 +20,7 @@ Bem-vindo ao **ConectPe**! Este é um protótipo de uma rede social web que tem 
 </div>
 
 ## Navegação Rápida
+- [Badges](#badges)
 - [Descrição do Projeto](#descrição-do-projeto)
 - [Funcionalidades](#funcionalidades)
 - [Funcionalidades Futuras](#funcionalidades-futuras)
