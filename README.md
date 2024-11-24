@@ -26,7 +26,6 @@ Bem-vindo ao **ConectPe**! Este é um protótipo de uma rede social web que tem 
 - [Como Rodar o Projeto](#como-rodar-o-projeto)
 - [Roadmap de Desenvolvimento](#roadmap-de-desenvolvimento)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Imagens do Projeto](#imagens-do-projeto)
 - [Licença](#licença)
 
 ---
