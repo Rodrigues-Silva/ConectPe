@@ -19,8 +19,8 @@ Bem-vindo ao **ConectPe**! Este é um protótipo de uma rede social web que tem 
 </div>
 
 ## 🚀 Navegação Rápida
-- [Descrição do Projeto](#-descrição-do-projeto)
-- [Funcionalidades](#-funcionalidades)
+- [Descrição do Projeto](#descrição-do-projeto)
+- [Funcionalidades](#funcionalidades)
 - [Funcionalidades Futuras](#funcionalidades-futuras)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Como Rodar o Projeto](#como-rodar-o-projeto)
