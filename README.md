@@ -28,13 +28,13 @@ Bem-vindo ao **ConectPe**! Este é um protótipo de uma rede social web que tem 
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Licença](#licença)
 
----
+
 
 ## Descrição do Projeto
 O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. Com um perfil personalizável, postagem de conteúdos e interação entre usuários, o protótipo utiliza tecnologias modernas para garantir uma experiência intuitiva e funcional.
 <a name="descrição-do-projeto"></a>
 
----
+
 
 ## Funcionalidades
 - Cadastro e login de usuários com autenticação via e-mail (token).
@@ -43,7 +43,7 @@ O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. 
 - Exclusão de posts.
 - Acesso ao perfil de outros usuários.
 
----
+
 
 ## Funcionalidades Futuras
 - Interações com posts: curtir, retweet, comentários e compartilhamento.
@@ -54,7 +54,7 @@ O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. 
 - Pesquisa avançada por assuntos (hashtags, posts e usuários relacionados).
 - Sistema de anúncios pagos, com planos semanais e benefícios adicionais.
 
----
+
 
 ## Estrutura do Projeto
 - **index.php**: Verifica se o usuário está logado e redireciona para a página principal ou tela de login.
@@ -68,7 +68,7 @@ O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. 
 - **policy.html**: Política de Privacidade.
 - **terms.html**: Termos de Uso.
 
----
+
 
 ## Como Rodar o Projeto
 1. Certifique-se de ter o [XAMPP](https://www.apachefriends.org/) ou outro servidor local configurado.
@@ -79,7 +79,7 @@ O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. 
 4. No navegador, acesse: `http://localhost/ConectPe`.
 5. Cadastre-se na plataforma e explore todas as funcionalidades disponíveis.
 
----
+
 
 ## Roadmap de Desenvolvimento
 ### Fase 1: Lançamento Inicial
@@ -108,7 +108,7 @@ O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. 
 - Preparação para o lançamento público.
 - **Status:** 🛠️ Em planejamento.
 
----
+
 
 ## Tecnologias Utilizadas
 - **Front-end**: HTML, CSS, JavaScript.
@@ -118,9 +118,9 @@ O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. 
 - **Bibliotecas**:
   - [PHPMailer](https://github.com/PHPMailer/PHPMailer).
 
----
+
 
 ## Licença
 Este projeto está licenciado sob a **MIT License**. Para mais detalhes, consulte o arquivo `LICENSE`.
 
----
+
