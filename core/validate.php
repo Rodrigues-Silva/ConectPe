@@ -2,6 +2,7 @@
     require_once "../src/PHPMailer.php";
     require_once "../src/SMTP.php";
     require_once "../src/Exception.php";
+    require "../vendor/autoload.php";
     // Inclui Arquivos necessarios para o envio de emails
 
     session_start();
@@ -12,7 +13,12 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
+    use Dotenv\Dotenv;
     // Dizemos quais classes usaremos no nosso projeto
+
+    $path = dirname(__FILE__,2);
+    $dotenv = Dotenv::createUnsafeImmutable($path);
+    $dotenv->load();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
@@ -117,7 +123,7 @@
                     $mail->Host = "smtp.gmail.com";
                     $mail->SMTPAuth = true;
                     $mail->Username = "ConectPe0@gmail.com";
-                    $mail->Password = "engg kaxz ylyi denu";
+                    $mail->Password = $_ENV["EMAILKEY"];
                     $mail->Port = 587;
                     $mail->SMTPOptions = [
                         'ssl' => [
@@ -131,7 +137,7 @@
                     $mail->addAddress($_SESSION["Email"]);
             
                     $mail->isHTML(true);
-                    $mail->Subject = "Código de Autenticação";
+                    $mail->Subject = "Codigo de Autenticacao";
                     $mail->Body = '
                     <html>
                     <head></head>
@@ -142,10 +148,10 @@
                                     <h1 style = "color: rgb(59 130 246);">ConectPE</h1>
                                 </div>
                                 <div style="padding: 20px;">
-                                    <p>Olá, ' . $_SESSION["Name"] ."</p>
-                                    <p>Utilize o código a seguir para finalizar seu cadastro.</p>
+                                    <p>Ola, ' . $_SESSION["Name"] ."</p>
+                                    <p>Utilize o codigo a seguir para finalizar seu cadastro.</p>
                                     <div style='font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center; margin: 20px 0;'>" . $_SESSION["token"] ."</div>
-                                    <p>Caso você não tenha solicitado este código, poderá ignorar com segurança este email. Outra pessoa pode ter digitado seu endereço de email por engano.</p>
+                                    <p>Caso você não tenha solicitado este codigo, podera ignorar com segurança este email. Outra pessoa pode ter digitado seu endereço de email por engano.</p>
                                     <p>Obrigado, " . $_SESSION["Name"] ."<br>Equipe de contas da ConectPe.</p>
         
                                 </div>
