@@ -31,7 +31,7 @@ Bem-vindo ao **ConectPe**! Este é um protótipo de uma rede social web que tem 
 
 ---
 
-## 📝 Descrição do Projeto
+## Descrição do Projeto
 O **ConectPe** conecta empregadores e candidatos de forma prática e eficiente. Com um perfil personalizável, postagem de conteúdos e interação entre usuários, o protótipo utiliza tecnologias modernas para garantir uma experiência intuitiva e funcional.
 <a name="descrição-do-projeto"></a>
 
